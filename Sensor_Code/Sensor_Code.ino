@@ -13,7 +13,7 @@ void setup() {
 void loop() {
   sensorVal = analogRead(sensorPin);
   Serial.println(sensorVal);
-  if(sensorVal >= 250){
+  if(sensorVal >= 150){
     digitalWrite(ledPin, HIGH);
   } else{
     digitalWrite(ledPin, LOW);
