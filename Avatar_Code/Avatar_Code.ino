@@ -16,8 +16,8 @@ void setup() {
   pinMode(mapLeds, OUTPUT);
   pinMode(fireLED, OUTPUT);
 
-  pinMode(rokuSwitch, INPUT); //initializes the switch to make roku dissappear
-  pinMode(iceSwitch, INPUT); //initializes the switch to make aang appear
+  pinMode(rokuSwitch, INPUT); //switch to make roku dissappear
+  pinMode(iceSwitch, INPUT); //switch to make aang appear
 
   benderServo1.attach(9);
   benderServo2.attach(10);
@@ -63,6 +63,13 @@ void loop() {
   }
   else{
   rokuServo.write(0);
+  }
+
+  if(digitalRead(aangSwitch)== HIGH){
+  servoSlow(aangServo, 0, 180, 20);
+  }
+  else{
+  aangServo.write(0);
   }
 
 
