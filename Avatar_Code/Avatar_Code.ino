@@ -15,7 +15,7 @@ void setup() {
   Serial.begin(9600);
   rokuServo.attach(8);
   pinMode(rokuSwitch, INPUT);
-
+  rokuServo.write(0);
 }
 
 void servoSlow(Servo &servo, int start, int end, int delayt){
@@ -49,6 +49,6 @@ void loop() {
     servoSlow(rokuServo, 0, 180, 20);
   }
   else{
-   rokuServo.write(0);
+  rokuServo.write(0);
   }
 }
