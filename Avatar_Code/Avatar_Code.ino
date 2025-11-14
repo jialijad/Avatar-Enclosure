@@ -12,7 +12,7 @@ int angle = 0;
 
 void setup() {
   pinMode(mapLeds, OUTPUT);
-  bendersServo1.attach(9);
+  benderServo1.attach(9);
   Serial.begin(9600);
   rokuServo.attach(8); //pin for roku servo
   aangServo.attach(6); //pin for aang's servo
@@ -38,17 +38,16 @@ int step;
 void loop() {
   digitalWrite(mapLeds, HIGH);
   if(angle == 0){
-   servoSlow(bendersServo1, angle, 180, 20);
+   servoSlow(benderServo1, angle, 180, 20);
+   servoSlow(benderServo2, 180, angle, 20);
    angle = 180;
   }
   if (angle == 180){
-   servoSlow(bendersServo1, 180, 0, 20);
+   servoSlow(benderServo1, 180, 0, 20);
+   servoSlow(benderServo2, 0, 180, 20);
    angle = 0;
   }
 
-  if (digitalRead(rokuSwitch) == HIGH){
-    servoSlow(rokuServo, 0, 180, 20);
-  }
   else{
   rokuServo.write(0);
   }
