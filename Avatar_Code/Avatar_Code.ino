@@ -6,12 +6,14 @@ Servo rokuServo; //variable for roku's servo
 Servo aangServo; //variable for aang's servo
 const int mapLeds = 13;
 const int rokuSwitch = 10;
+const int fireLED = 5; //fire nation led
 int i= 0;
 int angle = 0;
 
 
 void setup() {
   pinMode(mapLeds, OUTPUT);
+  pinMode(fireLED, OUTPUT);
   benderServo1.attach(9);
   benderServo2.attach(10);
   Serial.begin(9600);
