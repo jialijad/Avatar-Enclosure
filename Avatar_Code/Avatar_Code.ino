@@ -58,7 +58,9 @@ void loop() {
    angle = 0;
   }
 
-
+  if(digitalRead(rokuSwitch)== HIGH){
+  servoSlow(rokuServo, 0, 180, 20);
+  }
   else{
   rokuServo.write(0);
   }
