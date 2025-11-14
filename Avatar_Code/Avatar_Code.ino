@@ -49,6 +49,6 @@ void loop() {
     servoSlow(rokuServo, 0, 180, 20);
   }
   else{
-  servoSlow(rokuServo, 180, 0, 20);
+   rokuServo.write(0);
   }
 }
