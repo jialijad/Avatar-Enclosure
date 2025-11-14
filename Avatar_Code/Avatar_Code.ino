@@ -1,7 +1,9 @@
 #include <Servo.h>
 
-Servo bendersServo;
-Servo rokuServo;
+Servo benderServo1;
+Servo benderServo2;
+Servo rokuServo; //variable for roku's servo
+Servo aangServo; //variable for aang's servo
 const int mapLeds = 13;
 const int rokuSwitch = 10;
 int i= 0;
@@ -9,13 +11,13 @@ int angle = 0;
 
 
 void setup() {
-  // put your setup code here, to run once:
   pinMode(mapLeds, OUTPUT);
-  bendersServo.attach(9);
+  benderServo1.attach(9);
   Serial.begin(9600);
-  rokuServo.attach(8);
+  rokuServo.attach(8); //pin for roku servo
+  aangServo.attach(6); //pin for aang's servo
   pinMode(rokuSwitch, INPUT);
-
+  rokuServo.write(0); //initial state for roku
 }
 
 void servoSlow(Servo &servo, int start, int end, int delayt){
@@ -28,27 +30,27 @@ int step;
   }
   for (int a = start; a != end; a += step) {
     servo.write(a);
-    delay(delayt);    // increase this to make it slower
+    delay(delayt);    //delayt value controls speed
    }
   servo.write(end);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
   digitalWrite(mapLeds, HIGH);
   if(angle == 0){
-   servoSlow(bendersServo, angle, 180, 20);
+   servoSlow(benderServo1, angle, 180, 20);
+   servoSlow(benderServo2, 180, angle, 20);
    angle = 180;
   }
   if (angle == 180){
-   servoSlow(bendersServo, 180, 0, 20);
+   servoSlow(benderServo1, 180, 0, 20);
+   servoSlow(benderServo2, 0, 180, 20);
    angle = 0;
   }
 
-  if (digitalRead(rokuSwitch) == HIGH){
-    servoSlow(rokuServo, 0, 180, 20);
-  }
   else{
-   rokuServo.write(0);
+  rokuServo.write(0);
   }
+
+
 }
