@@ -13,6 +13,7 @@ int angle = 0;
 void setup() {
   pinMode(mapLeds, OUTPUT);
   benderServo1.attach(9);
+  benderServo2.attach(10);
   Serial.begin(9600);
   rokuServo.attach(8); //pin for roku servo
   aangServo.attach(6); //pin for aang's servo
