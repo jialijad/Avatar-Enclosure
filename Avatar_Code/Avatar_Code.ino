@@ -13,6 +13,19 @@ void setup() {
   Serial.begin(9600);
 }
 
+void servoSlow(int start, int end){
+  int step;
+  if (endAngle > startAngle) {
+    step = 1;
+  } else {
+    step = -1;
+  }
+  for (int a = start; a != end; a += step) {
+    bendersServo.write(a);
+    delay(15);
+  }
+  bendersServo.write(end);
+}
 
 void loop() {
   // put your main code here, to run repeatedly:
