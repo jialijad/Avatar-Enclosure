@@ -24,6 +24,6 @@ if(angle == 0){
 }
 if (angle == 90){
   bendersServo.write(angle);
-  angle = 180;
+  angle = 0;
 }
 }
