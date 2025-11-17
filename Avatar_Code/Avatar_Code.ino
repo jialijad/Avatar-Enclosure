@@ -30,36 +30,21 @@ void setup() {
   aangServo.write(0); //initial state for aang
 }
 
-void servoSlow(Servo &servo, int start, int end, int delayt){
-int step;
-
-  if (end > start) {
-    step = 1;
-  } else {
-    step = -1;
-  }
-  for (int a = start; a != end; a += step) {
-    servo.write(a);
-    delay(delayt);    //delayt value controls speed
-   }
-  servo.write(end);
-}
-
 void loop() {
   digitalWrite(mapLeds, HIGH);
   if(angle == 0){
-   servoSlow(benderServo1, angle, 180, 20);
-   servoSlow(benderServo2, 180, angle, 20);
+   //servoSlow(benderServo1, angle, 180, 20);
+  // servoSlow(benderServo2, 180, angle, 20);
    angle = 180;
   }
   if (angle == 180){
-   servoSlow(benderServo1, 180, 0, 20);
-   servoSlow(benderServo2, 0, 180, 20);
+   //servoSlow(benderServo1, 180, 0, 20);
+  // servoSlow(benderServo2, 0, 180, 20);
    angle = 0;
   }
 
   if(digitalRead(rokuSwitch)== HIGH){
-  servoSlow(rokuServo, 0, 180, 20);
+ // servoSlow(rokuServo, 0, 180, 20);
   }
   else{
   rokuServo.write(0);
