@@ -4,8 +4,9 @@ Servo benderServo1;
 Servo rokuServo; //variable for roku's servo
 Servo aangServo; //variable for aang's servo
 const int mapLeds = 13;
-const int rokuSwitch = 8;
+const int fireSwitch = 8;
 const int iceSwitch = 7;
+const int rokuSwitch = 11;
 const int fireLED = 5; //fire nation led
 int i= 0;
 int angle = 10;
@@ -14,7 +15,8 @@ void setup() {
   pinMode(mapLeds, OUTPUT);
   pinMode(fireLED, OUTPUT);
 
-  pinMode(rokuSwitch, INPUT); //switch to make roku dissappear
+  pinMode(fireSwitch, INPUT); //switch for fire interaction
+  pinMode(rokuSwitch, INPUT);
   pinMode(iceSwitch, INPUT); //switch to make aang appear
 
   benderServo1.attach(9);
@@ -41,28 +43,29 @@ void loop() {
      angle = 170;
   }
 
-  if(digitalRead(rokuSwitch)== HIGH){
+  if(digitalRead(fireSwitch)== HIGH){
     digitalWrite(fireLED, HIGH);
-    Serial.println("byeroku");
+  }
+  else{
+    digitalWrite(fireLED, LOW);
+  }
+
+  if(digitalRead(rokuSwitch)== HIGH){
+    rokuServo.write(90);
+    digitalWrite(fireLED, HIGH);
   }
   else{
     rokuServo.write(0);
     digitalWrite(fireLED, LOW);
-    Serial.println("hiroku");
   }
 
   if(digitalRead(iceSwitch)== HIGH){
+    aangServo.write(90);
   }
   else{
     aangServo.write(0);
   }
 
-  if(digitalRead(aangSwitch)== HIGH){
-  servoSlow(aangServo, 0, 180, 20);
-  }
-  else{
-  aangServo.write(0);
-  }
 
 
 }
