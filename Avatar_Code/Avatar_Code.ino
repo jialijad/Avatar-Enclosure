@@ -1,8 +1,6 @@
 #include <Servo.h>
 
 Servo benderServo1;
-int bendersAngle = 41;
-int benderSpeed = 0.5;
 Servo rokuServo; //variable for roku's servo
 Servo aangServo; //variable for aang's servo
 const int mapLeds = 13;
@@ -10,7 +8,7 @@ const int rokuSwitch = 8;
 const int iceSwitch = 7;
 const int fireLED = 5; //fire nation led
 int i= 0;
-int turn = 0;
+int angle = 10;
 
 void setup() {
   pinMode(mapLeds, OUTPUT);
@@ -33,21 +31,23 @@ void setup() {
 
 void loop() {
   digitalWrite(mapLeds, HIGH);
-  if(angle == 1){
+  if(angle == 170){
       benderServo1.write(0);   // spin CCW
-     angle = 0;
+     angle = 10;
   }
 
-  else if (angle == 0){
+  else if (angle == 10){
       benderServo1.write(180);  // spin CW
-     angle = 1;
+     angle = 170;
   }
 
   if(digitalRead(rokuSwitch)== HIGH){
+    digitalWrite(fireLED, HIGH);
     Serial.println("byeroku");
   }
   else{
     rokuServo.write(0);
+    digitalWrite(fireLED, LOW);
     Serial.println("hiroku");
   }
 
