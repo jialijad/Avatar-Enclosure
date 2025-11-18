@@ -1,16 +1,14 @@
 #include <Servo.h>
 
 Servo benderServo1;
-Servo benderServo2;
 Servo rokuServo; //variable for roku's servo
 Servo aangServo; //variable for aang's servo
 const int mapLeds = 13;
-const int rokuSwitch = 10;
+const int rokuSwitch = 8;
 const int iceSwitch = 7;
 const int fireLED = 5; //fire nation led
 int i= 0;
-int angle = 0;
-
+int angle = 10;
 
 void setup() {
   pinMode(mapLeds, OUTPUT);
@@ -20,49 +18,43 @@ void setup() {
   pinMode(iceSwitch, INPUT); //switch to make aang appear
 
   benderServo1.attach(9);
-  benderServo2.attach(10);
+  benderServo1.write(0);
 
   Serial.begin(9600);
 
-  rokuServo.attach(8); //pin for roku servo
+  rokuServo.attach(10); //pin for roku servo
   aangServo.attach(6); //pin for aang's servo
   rokuServo.write(0); //initial state for roku
   aangServo.write(0); //initial state for aang
-}
-
-void servoSlow(Servo &servo, int start, int end, int delayt){
-int step;
-
-  if (end > start) {
-    step = 1;
-  } else {
-    step = -1;
-  }
-  for (int a = start; a != end; a += step) {
-    servo.write(a);
-    delay(delayt);    //delayt value controls speed
-   }
-  servo.write(end);
+  Serial.begin(9600);
 }
 
 void loop() {
   digitalWrite(mapLeds, HIGH);
-  if(angle == 0){
-   servoSlow(benderServo1, angle, 180, 20);
-   servoSlow(benderServo2, 180, angle, 20);
-   angle = 180;
+  if(angle == 170){
+      benderServo1.write(0);   // spin CCW
+     angle = 10;
   }
-  if (angle == 180){
-   servoSlow(benderServo1, 180, 0, 20);
-   servoSlow(benderServo2, 0, 180, 20);
-   angle = 0;
+
+  else if (angle == 10){
+      benderServo1.write(180);  // spin CW
+     angle = 170;
   }
 
   if(digitalRead(rokuSwitch)== HIGH){
-  servoSlow(rokuServo, 0, 180, 20);
+    digitalWrite(fireLED, HIGH);
+    Serial.println("byeroku");
   }
   else{
-  rokuServo.write(0);
+    rokuServo.write(0);
+    digitalWrite(fireLED, LOW);
+    Serial.println("hiroku");
+  }
+
+  if(digitalRead(iceSwitch)== HIGH){
+  }
+  else{
+    aangServo.write(0);
   }
 
   if(digitalRead(aangSwitch)== HIGH){
