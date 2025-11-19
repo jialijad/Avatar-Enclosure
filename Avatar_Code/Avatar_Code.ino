@@ -49,23 +49,14 @@ void loop() {
   else{
     digitalWrite(fireLED, LOW);
   }
-
+ 
   if(digitalRead(rokuSwitch)== HIGH){
     rokuServo.write(90);
-    digitalWrite(fireLED, HIGH);
   }
   else{
     rokuServo.write(0);
-    digitalWrite(fireLED, LOW);
   }
 
-  if(digitalRead(iceSwitch)== HIGH){
     aangServo.write(90);
-  }
-  else{
-    aangServo.write(0);
-  }
-
-
 
 }
